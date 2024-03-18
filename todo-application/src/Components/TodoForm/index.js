@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import './TodoForm.css';
+import { useDispatch, useSelector } from "react-redux";
+import { TodoActionType } from "./ActionType";
 
 const TodoForm = () => {
+    const dispatch = useDispatch()
     const [taskInput, setTaskInput] = useState({ taskTitle: "", taskDesc: "", startDate: "", targetDate: "" })
 
     const onTaskInputHandler = (e) => {
@@ -10,6 +13,8 @@ const TodoForm = () => {
     }
     const onTaskSubmitHandler = (e) => {
         e.preventDefault();
+        TodoActionType.AddTodoInput(dispatch, taskInput)
+        console.log("input ", taskInput);
     }
     return <>
         <div className="todoForm-containe">
