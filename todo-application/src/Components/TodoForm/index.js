@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import './TodoForm.css';
 import { useDispatch, useSelector } from "react-redux";
 import { TodoActionType } from "./ActionType";
+import axios from "axios";
 
 const TodoForm = () => {
     const dispatch = useDispatch()
@@ -15,6 +16,18 @@ const TodoForm = () => {
         e.preventDefault();
         TodoActionType.AddTodoInput(dispatch, taskInput)
         console.log("input ", taskInput);
+        async function fetchdta() {
+            const res = await axios.get("https://silver-space-telegram-46xvjqwg76gh7qqp-4000.app.github.dev/",{headers:{
+                "Accept": "application/json, text/plain, */*",
+                "Access-Control-Allow-Origin": "*" }})
+            const sor = await res.json();
+
+            console.log("response", sor);
+
+            // const res=fetch("http://localhost:3050/todoData").then(res=>res.json()).then(res=>console.log("success",res)).catch(e=>console.log("Failt=ure",e))
+            // const res=fetch("http://localhost:3050/todoData",{method:"POST",body:JSON.stringify(taskInput),headers:{"Context-type":"application/json"}}).then(res=>res.json()).then(res=>console.log("success",res)).catch(e=>console.log("Failt=ure",e))
+        }
+        fetchdta()
     }
     return <>
         <div className="todoForm-containe">
